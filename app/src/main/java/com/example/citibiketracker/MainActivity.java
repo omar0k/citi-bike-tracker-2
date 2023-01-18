@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 
 import com.example.citibiketracker.RecyclerView.MyAdapter;
 import com.example.citibiketracker.network.ApiHelper;
+import com.example.citibiketracker.network.StationInformation;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -41,15 +42,16 @@ public class MainActivity extends AppCompatActivity implements ApiHelper.OnGetAl
         setContentView(R.layout.activity_main);
         ApiHelper apiHelper = new ApiHelper();
         LiveData<ArrayList<Station>> ebikeStationsLiveData = apiHelper.getEbikeStations();
+        ApiHelper.GetAllStationsTask task = new ApiHelper.GetAllStationsTask(apiHelper.citiBikeApi, (ApiHelper.OnGetAllStationsTaskCompleted) this);
+        task.execute();
         ebikeStationsLiveData.observe(this, new Observer<ArrayList<Station>>() {
             @Override
             public void onChanged(ArrayList<Station> ebikeStations) {
-                // now you can work with the ebikeStations here
                 EbikeStations = ebikeStations;
+
             }
         });
-        ApiHelper.GetAllStationsTask task = new ApiHelper.GetAllStationsTask(apiHelper.citiBikeApi, (ApiHelper.OnGetAllStationsTaskCompleted) this);
-        task.execute();
+
 
 
         btn_allStations = findViewById(R.id.btn_allStations);
@@ -61,16 +63,20 @@ public class MainActivity extends AppCompatActivity implements ApiHelper.OnGetAl
             @Override
             public void onClick(View view) {
                 rv_stationsList.setAdapter(new MyAdapter(getApplicationContext(), AllStations));
-                for (Station s : AllStations) {
-                    Log.d("ids", s.getID());
-                }
             }
         });
         btn_ebikeStations.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, String.valueOf(EbikeStations.size()));
-
+                for (Station s : EbikeStations) {
+                    for (Station stationForInfo : AllStations) {
+                        if (s.getID().equals(stationForInfo.getID())) {
+                            s.setName(stationForInfo.getName());
+                        }
+                    }
+                }
+                rv_stationsList.setAdapter(new MyAdapter(getApplicationContext(), EbikeStations));
             }
         });
         btn_favoriteStations.setOnClickListener(new View.OnClickListener() {

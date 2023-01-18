@@ -97,6 +97,7 @@ public class ApiHelper {
         public GetAllStationsTask(CitiBikeApi citiBikeApi) {
             this.citiBikeApi = citiBikeApi;
         }
+
         private OnGetAllStationsTaskCompleted listener;
 
         public GetAllStationsTask(CitiBikeApi citiBikeApi, OnGetAllStationsTaskCompleted listener) {
@@ -133,6 +134,7 @@ public class ApiHelper {
         }
 
     }
+
     public interface OnGetAllStationsTaskCompleted {
         void onTaskCompleted(ArrayList<Station> stations);
     }
