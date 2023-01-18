@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn_allStations"
+        android:layout_width="116dp"
+        android:layout_height="55dp"
+        android:layout_alignParentStart="true"
+        android:text="All Stations"
+        tools:layout_editor_absoluteY="29dp" />
+
+
+    <Button
+        android:id="@+id/btn_ebikeStations"
+        android:layout_width="116dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:text="Electric Only"
+        tools:layout_editor_absoluteY="32dp" />
+
+    <Button
+        android:id="@+id/btn_favoriteStations"
+        android:layout_width="116dp"
+        android:layout_height="55dp"
+        android:layout_alignParentEnd="true"
+        android:text="Favorites"
+        tools:layout_editor_absoluteY="34dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_stationsList"
+        android:layout_below="@id/btn_favoriteStations"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+         />
+
+</RelativeLayout>
