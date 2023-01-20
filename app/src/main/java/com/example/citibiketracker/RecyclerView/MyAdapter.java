@@ -1,9 +1,11 @@
 package com.example.citibiketracker.RecyclerView;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +23,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public MyAdapter(Context context, ArrayList<Station> items) {
         this.context = context;
         this.items = items;
+
     }
 
 
@@ -32,8 +35,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.stationName.setText(items.get(position).getName());
-        holder.stationId.setText(items.get(position).getID());
+        int pos = holder.getLayoutPosition();
+        holder.stationId.setText(items.get(pos).getID());
+        holder.stationName.setText(items.get(pos).getName());
+        Station currentStation = items.get(pos);
+        if (currentStation.getFavorite()) {
+            holder.ic_favorite.setImageResource(android.R.drawable.btn_star_big_on);
+        } else {
+            holder.ic_favorite.setImageResource(android.R.drawable.btn_star_big_off);
+        }
+        holder.ic_favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentStation.setFavorite(!currentStation.getFavorite());
+                ImageView icon = (ImageView) view;
+                if (currentStation.getFavorite()) {
+                    holder.ic_favorite.setImageResource(android.R.drawable.btn_star_big_on);
+                } else {
+                    holder.ic_favorite.setImageResource(android.R.drawable.btn_star_big_off);
+                }
+            }
+        });
+
     }
 
     @Override

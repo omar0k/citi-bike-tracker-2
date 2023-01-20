@@ -10,16 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.citibiketracker.R;
 
 
-public class MyViewHolder  extends RecyclerView.ViewHolder {
-    TextView stationName,stationId;
+public class MyViewHolder extends RecyclerView.ViewHolder {
+    TextView stationName, stationId;
     ImageView ic_favorite;
 
-    public MyViewHolder (View itemView)
-    {
+    public MyViewHolder(@NonNull View itemView) {
         super(itemView);
-        stationName=itemView.findViewById(R.id.station_name);
-        stationId=itemView.findViewById(R.id.station_id);
-        ic_favorite=itemView.findViewById(R.id.ic_favorite);
-
+        stationName = itemView.findViewById(R.id.station_name);
+        stationId = itemView.findViewById(R.id.station_id);
+        ic_favorite = itemView.findViewById(R.id.ic_favorite);
     }
 }

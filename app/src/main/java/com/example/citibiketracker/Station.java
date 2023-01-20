@@ -1,13 +1,14 @@
 package com.example.citibiketracker;
 
 public class Station {
-    String name;
-    String ID;
-    Boolean isFavorite;
+    private String name;
+    private String ID;
+    private Boolean isFavorite;
 
     public Station(String name, String ID) {
         this.name = name;
         this.ID = ID;
+        this.isFavorite=false;
     }
 
     public String getName() {
